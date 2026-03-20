@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Example: SmartCron + node-cron integration.
+ * Example: CronWatch + node-cron integration.
  *
  * Install node-cron first:
  *   npm install node-cron
@@ -10,7 +10,7 @@
  *   node examples/with-node-cron.js
  */
 
-const { createSmartCron } = require('../src');
+const { createCronWatch } = require('../src');
 
 let cron;
 try {
@@ -20,13 +20,13 @@ try {
   process.exit(0);
 }
 
-const smartcron = createSmartCron({
+const cronwatch = createCronWatch({
   retries: 1,
   retryDelay: 2000,
   timeout: 10000,
 });
 
-smartcron.use({
+cronwatch.use({
   name: 'alert-on-failure',
   onFailure({ jobName, error }) {
     console.log(`[ALERT] Job "${jobName}" failed: ${error.message}`);
@@ -36,7 +36,7 @@ smartcron.use({
 
 // Runs every 10 seconds
 cron.schedule('*/10 * * * * *', () => {
-  smartcron.trackJob('health-check', async () => {
+  cronwatch.trackJob('health-check', async () => {
     const start = Date.now();
     // Simulate an HTTP health check
     await new Promise((r) => setTimeout(r, 50 + Math.random() * 200));
@@ -45,4 +45,4 @@ cron.schedule('*/10 * * * * *', () => {
   });
 });
 
-console.log('SmartCron + node-cron running. Health check every 10s. Press Ctrl+C to stop.');
+console.log('CronWatch + node-cron running. Health check every 10s. Press Ctrl+C to stop.');

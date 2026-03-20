@@ -1,4 +1,4 @@
-# SmartCron
+# CronWatch
 
 Lightweight cron job tracker, debugger, and monitor for Node.js applications.
 
@@ -7,15 +7,15 @@ Zero dependencies. Full TypeScript support. Plugin-ready.
 ## Install
 
 ```bash
-npm install smartcron
+npm install cronwatch
 ```
 
 ## Quick Start
 
 ```js
-const { createSmartCron } = require('smartcron');
+const { createCronWatch } = require('cronwatch');
 
-const cron = createSmartCron();
+const cron = createCronWatch();
 
 await cron.trackJob('send-emails', async () => {
   // your job logic here
@@ -28,7 +28,7 @@ Every call to `trackJob` automatically captures start/end time, duration, succes
 ## Configuration
 
 ```js
-const cron = createSmartCron({
+const cron = createCronWatch({
   retries: 3,                // max retry attempts (default: 0)
   retryDelay: 1000,          // base delay between retries in ms (default: 1000)
   retryBackoff: 'exponential', // 'fixed' | 'linear' | 'exponential'
@@ -95,7 +95,7 @@ await cron.clearLogs();
 
 ## Plugin System
 
-Extend SmartCron by hooking into job lifecycle events.
+Extend CronWatch by hooking into job lifecycle events.
 
 ```js
 cron.use({
@@ -124,7 +124,7 @@ cron.use({
 By default, logs are kept in memory. You can plug in any backend:
 
 ```js
-const { createSmartCron, StoreAdapter } = require('smartcron');
+const { createCronWatch, StoreAdapter } = require('cronwatch');
 
 class MongoAdapter extends StoreAdapter {
   async save(entry)          { /* insert into MongoDB */ }
@@ -133,7 +133,7 @@ class MongoAdapter extends StoreAdapter {
   async clear()              { /* drop collection */ }
 }
 
-const cron = createSmartCron({
+const cron = createCronWatch({
   storeAdapter: new MongoAdapter(),
 });
 ```
@@ -144,9 +144,9 @@ See `examples/custom-store-adapter.js` for a working file-based adapter.
 
 ```js
 const nodeCron = require('node-cron');
-const { createSmartCron } = require('smartcron');
+const { createCronWatch } = require('cronwatch');
 
-const cron = createSmartCron({ retries: 2, timeout: 10000 });
+const cron = createCronWatch({ retries: 2, timeout: 10000 });
 
 nodeCron.schedule('*/5 * * * *', () => {
   cron.trackJob('cleanup-temp-files', async () => {
@@ -160,11 +160,11 @@ nodeCron.schedule('*/5 * * * *', () => {
 Full type definitions are included. Import and use directly:
 
 ```ts
-import { createSmartCron, SmartCronPlugin, JobEntry } from 'smartcron';
+import { createCronWatch, CronWatchPlugin, JobEntry } from 'cronwatch';
 
-const cron = createSmartCron({ retries: 2 });
+const cron = createCronWatch({ retries: 2 });
 
-const plugin: SmartCronPlugin = {
+const plugin: CronWatchPlugin = {
   name: 'my-plugin',
   onSuccess({ jobName }) {
     console.log(`${jobName} done`);
@@ -176,9 +176,9 @@ cron.use(plugin);
 
 ## API Reference
 
-### `createSmartCron(options?)`
+### `createCronWatch(options?)`
 
-Creates a new SmartCron instance.
+Creates a new CronWatch instance.
 
 ### `instance.trackJob(jobName, jobFn, options?)`
 

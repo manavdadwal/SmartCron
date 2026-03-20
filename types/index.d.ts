@@ -1,4 +1,4 @@
-export interface SmartCronOptions {
+export interface CronWatchOptions {
   /** Max retry attempts (default: 0) */
   retries?: number;
   /** Base delay between retries in ms (default: 1000) */
@@ -47,7 +47,7 @@ export interface PluginContext {
   [key: string]: unknown;
 }
 
-export interface SmartCronPlugin {
+export interface CronWatchPlugin {
   name: string;
   onStart?(ctx: PluginContext): void | Promise<void>;
   onSuccess?(ctx: PluginContext): void | Promise<void>;
@@ -57,11 +57,11 @@ export interface SmartCronPlugin {
 }
 
 export declare class Config {
-  constructor(overrides?: Partial<SmartCronOptions>);
-  get<K extends keyof SmartCronOptions>(key: K): SmartCronOptions[K];
-  set<K extends keyof SmartCronOptions>(key: K, value: SmartCronOptions[K]): this;
-  merge(overrides?: Partial<SmartCronOptions>): Config;
-  toJSON(): SmartCronOptions;
+  constructor(overrides?: Partial<CronWatchOptions>);
+  get<K extends keyof CronWatchOptions>(key: K): CronWatchOptions[K];
+  set<K extends keyof CronWatchOptions>(key: K, value: CronWatchOptions[K]): this;
+  merge(overrides?: Partial<CronWatchOptions>): Config;
+  toJSON(): CronWatchOptions;
 }
 
 export declare class Logger {
@@ -95,7 +95,7 @@ export declare class Store {
 }
 
 export declare class PluginManager {
-  register(plugin: SmartCronPlugin): this;
+  register(plugin: CronWatchPlugin): this;
   emit(hookName: string, context: PluginContext): Promise<void>;
   readonly plugins: string[];
 }
@@ -105,14 +105,14 @@ export declare class TimeoutError extends Error {
   constructor(jobName: string, ms: number);
 }
 
-export declare class SmartCron {
-  constructor(options?: SmartCronOptions);
+export declare class CronWatch {
+  constructor(options?: CronWatchOptions);
   trackJob(
     jobName: string,
     jobFn: () => unknown | Promise<unknown>,
     options?: JobTrackOptions
   ): Promise<JobEntry>;
-  use(plugin: SmartCronPlugin): this;
+  use(plugin: CronWatchPlugin): this;
   getJobLogs(jobName: string): Promise<JobEntry[]>;
   getAllLogs(): Promise<JobEntry[]>;
   clearLogs(): Promise<void>;
@@ -121,7 +121,7 @@ export declare class SmartCron {
   readonly plugins: string[];
 }
 
-export declare function createSmartCron(options?: SmartCronOptions): SmartCron;
+export declare function createCronWatch(options?: CronWatchOptions): CronWatch;
 
 export declare const LOG_LEVELS: {
   readonly DEBUG: 0;
@@ -131,7 +131,7 @@ export declare const LOG_LEVELS: {
   readonly SILENT: 4;
 };
 
-export declare const DEFAULTS: Readonly<SmartCronOptions>;
+export declare const DEFAULTS: Readonly<CronWatchOptions>;
 
 export declare const HOOK_NAMES: readonly string[];
 

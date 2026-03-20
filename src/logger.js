@@ -70,7 +70,7 @@ class Logger {
       parts.push(`${c.dim}${entry.timestamp}${c.reset}`);
     }
     parts.push(`${color}[${entry.label}]${c.reset}`);
-    parts.push(`${c.magenta}[SmartCron]${c.reset}`);
+    parts.push(`${c.magenta}[CronWatch]${c.reset}`);
     parts.push(entry.message);
 
     return parts.join(' ');

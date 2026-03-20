@@ -7,7 +7,7 @@ const { PluginManager, HOOK_NAMES } = require('./plugin');
 const { trackJob: _trackJob, TimeoutError } = require('./tracker');
 const { BACKOFF_STRATEGIES } = require('./retry');
 
-class SmartCron {
+class CronWatch {
   #config;
   #logger;
   #store;
@@ -63,13 +63,13 @@ class SmartCron {
   }
 }
 
-function createSmartCron(options = {}) {
-  return new SmartCron(options);
+function createCronWatch(options = {}) {
+  return new CronWatch(options);
 }
 
 module.exports = {
-  SmartCron,
-  createSmartCron,
+  CronWatch,
+  createCronWatch,
   Config,
   Logger,
   Store,

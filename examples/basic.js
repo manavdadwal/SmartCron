@@ -1,9 +1,9 @@
 'use strict';
 
-const { createSmartCron, LOG_LEVELS } = require('../src');
+const { createCronWatch, LOG_LEVELS } = require('../src');
 
 async function main() {
-  const cron = createSmartCron({
+  const cron = createCronWatch({
     logLevel: LOG_LEVELS.DEBUG,
     retries: 2,
     retryDelay: 500,

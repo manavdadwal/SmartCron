@@ -36,7 +36,7 @@ class PluginManager {
         try {
           await plugin[hookName](context);
         } catch (err) {
-          console.error(`[SmartCron] Plugin "${plugin.name}" threw in ${hookName}:`, err);
+          console.error(`[CronWatch] Plugin "${plugin.name}" threw in ${hookName}:`, err);
         }
       }
     }

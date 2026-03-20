@@ -9,7 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { createSmartCron, StoreAdapter } = require('../src');
+const { createCronWatch, StoreAdapter } = require('../src');
 
 class FileAdapter extends StoreAdapter {
   #filePath;
@@ -52,7 +52,7 @@ class FileAdapter extends StoreAdapter {
 async function main() {
   const logFile = path.join(__dirname, 'job-logs.json');
 
-  const cron = createSmartCron({
+  const cron = createCronWatch({
     storeAdapter: new FileAdapter(logFile),
   });
 

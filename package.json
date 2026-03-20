@@ -1,5 +1,5 @@
 {
-  "name": "smartcron",
+  "name": "cronwatch",
   "version": "1.0.0",
   "description": "Lightweight cron job tracker, debugger, and monitor for Node.js applications",
   "main": "src/index.js",
