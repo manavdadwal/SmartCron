@@ -1,0 +1,4 @@
+node_modules/
+examples/job-logs.json
+*.log
+.DS_Store

@@ -1,0 +1,33 @@
+{
+  "name": "smartcron",
+  "version": "1.0.0",
+  "description": "Lightweight cron job tracker, debugger, and monitor for Node.js applications",
+  "main": "src/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "src/",
+    "types/"
+  ],
+  "scripts": {
+    "example": "node examples/basic.js",
+    "example:cron": "node examples/with-node-cron.js",
+    "test": "node --test test/"
+  },
+  "keywords": [
+    "cron",
+    "scheduler",
+    "monitor",
+    "tracking",
+    "jobs",
+    "retry",
+    "logging",
+    "debug"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
