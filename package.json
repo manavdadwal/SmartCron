@@ -23,7 +23,7 @@
     "logging",
     "debug"
   ],
-  "author": "",
+  "author": "Manav Dadwal",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
